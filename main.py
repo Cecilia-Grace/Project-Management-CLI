@@ -135,6 +135,29 @@ def handle_delete_task(args):
     save_projects(updated_tasks)
     print(f"🗑️ tasks [{args.title}] has been deleted successfully.")
     
+def handle_update_task(args):
+    """finds a task by its ID and updates its status."""
+    tasks = load_tasks()
+    
+    # target task by its title
+    target_task = None
+    for task in tasks:
+        if task.task_title.lower() == args.title.lower():
+            target_task = task
+            break
+            
+    if not target_task:
+        print(f"Task with ID '{args.title}' could not be found.")
+        return
+        
+    #update the state values
+    old_status = target_task.status
+    target_task.status = args.status
+    save_tasks(tasks)
+    
+    print(f"🔄 Task [{target_task.task_title}] updated successfully!")
+    print(f"   Status changed from: '{old_status}' ➡️ '{target_task.status}'")
+    
 
 
 #users
@@ -200,6 +223,8 @@ def handle_delete_user(args):
     if updated_count > 0:
         save_tasks(tasks)
         print(f"🧹 Unassigned {updated_count} task(s) previously owned by this user.")
+        
+
     
 
 
@@ -250,6 +275,12 @@ def main():
     delete_parser.add_argument("title", type=str, help="The exact task title")
     delete_parser.set_defaults(func=handle_delete_task)
     
+    # Command: pm update-task
+    update_task_parser = subparsers.add_parser("update-task", help="Update the status of an existing task")
+    update_task_parser.add_argument("title", type=str, help="The title of a task")
+    update_task_parser.add_argument("status", type=str, choices=["To Do", "In Progress", "Done"], 
+                                    help="The new status state for the task")
+    update_task_parser.set_defaults(func=handle_update_task)
     
     """users"""
     #command: pm create-user
