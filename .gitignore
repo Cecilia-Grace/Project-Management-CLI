@@ -1,0 +1,19 @@
+# --- Local Project Data ---
+data/
+*.json
+
+# --- Python Environment & Caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# --- Virtual Environments ---
+.venv/
+env/
+venv/
+ENV/
+
+# --- Operating System Junk ---
+.DS_Store
+Thumbs.db
