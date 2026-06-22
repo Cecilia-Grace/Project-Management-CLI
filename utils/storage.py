@@ -35,7 +35,7 @@ def load_projects():            #loads data
 def save_tasks(tasks_list):               #saves data
     ensure_data_exists()
     serializable_data = [t.to_dict() for t in tasks_list]
-    with open(tasks_list, "w") as f:
+    with open(tasks_file, "w") as f:
         json.dump(serializable_data, f, indent=4)
 
 def load_tasks():            #loads data

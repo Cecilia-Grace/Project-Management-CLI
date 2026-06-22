@@ -25,9 +25,7 @@ class Project:
     
     @classmethod
     def from_dict(cls, data):
-        valid_keys = {"project_title", "user_id", "due_date", "project_description", "id"}
-        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
-        return cls(**filtered_data)
+        return cls(**data)
     
     
     def __str__(self):

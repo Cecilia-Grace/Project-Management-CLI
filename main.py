@@ -236,8 +236,8 @@ def main():
     task_parser = subparsers.add_parser("create-task", help="Add a task to a project")
     task_parser.add_argument("project_id", type=str, help="The ID of the project this task belongs to")
     task_parser.add_argument("title", type=str, help="The name/title of the task")
-    task_parser.add_argument("--status", type=str, default="", help="Task status (To Do, In Progress, Done)")
-    task_parser.add_argument("--assigned_to", type=str, help="Owner of the project")
+    task_parser.add_argument("--status", type=str, default="To Do", help="Task status (To Do, In Progress, Done)")
+    task_parser.add_argument("--assigned-to", type=str, default=None, help="Owner of the project")
     task_parser.set_defaults(func=handle_create_tasks)
 
     # Command: pm list-tasks
